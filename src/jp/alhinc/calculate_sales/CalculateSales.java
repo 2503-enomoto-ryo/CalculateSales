@@ -50,7 +50,6 @@ public class CalculateSales {
 				rcdFiles.add(files[i]);
 			}
 		}
-		System.out.println(rcdFiles);
 
 		for(int i = 0; i < rcdFiles.size(); i++) {
 			//支店定義ファイル読み込み(readFileメソッド)を参考に売上ファイルの中身を読み込みます。
@@ -70,9 +69,9 @@ public class CalculateSales {
 
 				Long saleAmount = branchSales.get(branchData.get(0)) + fileSale;
 				branchSales.put(branchData.get(0), saleAmount);
-				System.out.println(saleAmount);
 			} catch(IOException e) {
 				System.out.println(UNKNOWN_ERROR);
+				return;
 			} finally {
 				if(br != null) {
 					// ファイルを開いている場合
@@ -81,6 +80,7 @@ public class CalculateSales {
 						br.close();
 					} catch(IOException e) {
 						System.out.println(UNKNOWN_ERROR);
+						return;
 					}
 				}
 			}
@@ -115,8 +115,8 @@ public class CalculateSales {
 			while((line = br.readLine()) != null) {
 				// ※ここの読み込み処理を変更してください。(処理内容1-2)
 				String[] items = line.split(",");
-				branchNames.put(items[0],items[1]);
-				branchSales.put(items[0],0L);
+				branchNames.put(items[0], items[1]);
+				branchSales.put(items[0], 0L);
 			}
 
 		} catch(IOException e) {
@@ -151,7 +151,7 @@ public class CalculateSales {
 		BufferedWriter bw = null;
 
 		try {
-			File file = new File(path,fileName);
+			File file = new File(path, fileName);
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 
