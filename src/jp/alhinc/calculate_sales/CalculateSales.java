@@ -46,7 +46,7 @@ public class CalculateSales {
 
 		for(int i = 0; i < files.length ; i++) {
 
-			if(files[i].getName().matches("^[0-9]{8}.rcd$")) {
+			if(files[i].getName().matches("^[0-9]{8}[.]rcd$")) {
 				rcdFiles.add(files[i]);
 			}
 		}
