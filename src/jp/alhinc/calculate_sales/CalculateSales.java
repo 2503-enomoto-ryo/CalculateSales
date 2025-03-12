@@ -90,19 +90,21 @@ public class CalculateSales {
 				List<String> branchData = new ArrayList<>();
 
 				String line;
+				String fileName = rcdFiles.get(i).getName();
+
 				while((line = br.readLine()) != null) {
 					branchData.add(line);
 				}
 
-				//売上ファイルの中身が3桁以上でないかどうか確認
+				//売上ファイルの中身が2行かどうかを確認
 				if(branchData.size() != 2) {
-					System.out.println(rcdFiles.get(i).getName() + SALESFILE_NOT_CONSECUTIVE);
+					System.out.println(fileName + SALESFILE_NOT_CONSECUTIVE);
 					return;
 				}
 
 				//売上ファイルにある支店コードが支店定義ファイルに存在するか確認
 				if (!branchNames.containsKey(branchData.get(0))) {
-				    System.out.println(rcdFiles.get(i).getName() + BRANCHCODE_ILLEGAL);
+				    System.out.println(fileName + BRANCHCODE_ILLEGAL);
 				    return;
 				}
 
