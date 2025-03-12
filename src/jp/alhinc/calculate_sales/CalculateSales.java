@@ -95,18 +95,18 @@ public class CalculateSales {
 				}
 				//売り上げファイルにある支店コードが支店定義ファイルに存在するか確認
 				if (!branchNames.containsKey(branchData.get(0))) {
-				    System.out.println("<" + rcdFiles.get(i).getName() + ">" + BRANCHCODE_ILLEGAL);
+				    System.out.println(rcdFiles.get(i).getName() + BRANCHCODE_ILLEGAL);
 				    return;
 				}
 
 				//売上ファイルの中身が3桁以上でないかどうか確認
 				if(branchData.size() != 2) {
-					System.out.println("<" + rcdFiles.get(i).getName() + ">" + SALESFILE_NOT_CONSECUTIVE);
+					System.out.println(rcdFiles.get(i).getName() + SALESFILE_NOT_CONSECUTIVE);
 					return;
 				}
 
 				//売上金額が数字かどうか確認
-				if(!branchData.get(1).matches("^[0-9]$")) {
+				if(!branchData.get(1).matches("^[0-9]+$")) {
 					System.out.println(UNKNOWN_ERROR);
 					return;
 				}
