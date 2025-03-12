@@ -130,7 +130,7 @@ public class CalculateSales {
 				    return;
 				}
 
-				//商品情報を保持しているMapに商品ファイルの商品コードが存在するか確認
+				//商品情報を保持しているMapに売上ファイルの商品コードが存在するか確認
 				if (!commodityNames.containsKey(branchData.get(1))) {
 				    System.out.println(fileName + COMMODITYCODE_ILLEGAL);
 				    return;
@@ -145,13 +145,18 @@ public class CalculateSales {
 
 				long fileSale = Long.parseLong(branchData.get(2));
 
+				//支店売上を合計
 				Long branchSaleAmount = branchSales.get(branchData.get(0)) + fileSale;
+				//商品売上を合計
 				Long commoditySaleAmount = commoditySales.get(branchData.get(1)) + fileSale;
+
 				//売上⾦額の合計が10桁を超えたか確認
 				if(branchSaleAmount >= 10000000000L || commoditySaleAmount >= 10000000000L){
 					System.out.println(SALEAMOUNT_OVER);
 					return;
 				}
+
+				// 集計結果を保存
 				branchSales.put(branchData.get(0), branchSaleAmount);
 				commoditySales.put(branchData.get(1), commoditySaleAmount);
 
@@ -217,7 +222,9 @@ public class CalculateSales {
 					System.out.println(category + FILE_INVALID_FORMAT);
 					return false;
 				}
+				//読み込んだ支店コードと支店名をMapに保持
 				codeNamesMap.put(items[0], items[1]);
+				//読み込んだ商品コードと商品名をMapに保持
 				codeSalesMap.put(items[0], 0L);
 			}
 
@@ -258,6 +265,7 @@ public class CalculateSales {
 			FileWriter fw = new FileWriter(file);
 			bw = new BufferedWriter(fw);
 
+			//Mapに保持されているすべてのキーを取得して、「コード,名称,売上」の順で書き込み
 			for(String key : codeNamesMap.keySet()) {
 				bw.write(key + "," + codeNamesMap.get(key) + "," + codeSalesMap.get(key));
 				bw.newLine();
